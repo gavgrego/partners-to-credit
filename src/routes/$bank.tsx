@@ -1,6 +1,7 @@
 import { Card } from '@/components/ui/card';
 import { createFileRoute } from '@tanstack/react-router';
 import { useTransferPartners } from '@/hooks/useTransferPartners';
+import SEO from '@/components/SEO';
 
 export const Route = createFileRoute('/$bank')({
   component: BankPage,
@@ -25,13 +26,18 @@ function BankPage() {
   );
 
   const bankLogo = bankData?.source;
+  const bankSlug = bankData?.name.toLowerCase().replace(/\s+/g, '-');
 
   if (!bankData) {
     return <div>Bank not found</div>;
   }
-
   return (
     <div className="mx-auto py-8 text-foreground w-full">
+      <SEO
+        title={`${bankData.name} Transfer Partners`}
+        description={`View all ${bankData.name} transfer partners and current transfer bonuses. Compare transfer ratios and find the best value for your points.`}
+        canonical={`https://partnersto.credit/${bankSlug}`}
+      />
       <h1 className="text-4xl font-bold mb-6 flex items-center gap-4">
         <img src={bankLogo} alt={bankData.name} className="w-10 h-10" />
         {bankData.name} Transfer Partners

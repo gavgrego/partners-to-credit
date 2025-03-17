@@ -21,28 +21,26 @@ const Header = () => {
           <NavigationMenuList>
             <NavigationMenuItem>
               <NavigationMenuTrigger>Banks&nbsp;&nbsp;</NavigationMenuTrigger>
-              <NavigationMenuContent>
+              <NavigationMenuContent className="[&_div]:py-1">
                 {/* @ts-ignore */}
-                <Link to="/american-express" legacyBehavior passHref>
-                  <NavigationMenuLink>American Express</NavigationMenuLink>
+                <Link to="/american-express">
+                  <div>American Express</div>
                 </Link>
                 {/* @ts-ignore */}
-                <Link to="/chase" legacyBehavior passHref>
-                  <NavigationMenuLink href="/chase">Chase</NavigationMenuLink>
+                <Link to="/chase">
+                  <div>Chase</div>
                 </Link>
                 {/* @ts-ignore */}
-                <Link to="/capital-one" legacyBehavior passHref>
-                  <NavigationMenuLink href="/capital-one">
-                    Capital One
-                  </NavigationMenuLink>
+                <Link to="/capital-one">
+                  <div>Capital One</div>
                 </Link>
                 {/* @ts-ignore */}
-                <Link to="/citi" legacyBehavior passHref>
-                  <NavigationMenuLink>Citi</NavigationMenuLink>
+                <Link to="/citi">
+                  <div>Citi</div>
                 </Link>
                 {/* @ts-ignore */}
-                <Link to="/bilt" legacyBehavior passHref>
-                  <NavigationMenuLink>BILT</NavigationMenuLink>
+                <Link to="/bilt">
+                  <div>BILT</div>
                 </Link>
               </NavigationMenuContent>
             </NavigationMenuItem>
