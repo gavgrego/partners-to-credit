@@ -37,7 +37,7 @@ const TransferChart = () => {
       .range(PARTNER_COLORS);
 
     // Add links with hover effects
-    createLinks(svg, sankeyLinks, sankeyNodes, partnerColorScale);
+    createLinks(svg, sankeyLinks);
 
     // Add nodes with hover effects
     createNodes(svg, sankeyNodes, partnerColorScale);
