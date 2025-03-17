@@ -1,10 +1,16 @@
 import Chart from '@/components/Chart';
 import CurrentBonuses from '@/components/CurrentBonuses';
+import { Spinner } from '@/components/Spinner';
 import { Card } from '@/components/ui/card';
 import { createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/')({
   component: IndexPage,
+  pendingComponent: () => (
+    <div className="animate-pulse text-muted-foreground">
+      <Spinner size="lg" />
+    </div>
+  ),
 });
 
 function IndexPage() {

@@ -253,7 +253,7 @@ export const createLabels = (
               .attr('dominant-baseline', 'middle')
               .style('fill', '#e5e7eb')
               .style('font-family', 'Geist Mono')
-              .style('font-size', '14px')
+              .style('font-size', '12px')
               .text(d.id);
           })
           .on('mouseout', function () {
@@ -271,7 +271,7 @@ export const createLabels = (
           .text(label)
           .style('fill', '#e5e7eb')
           .style('font-family', 'Geist Mono')
-          .style('font-size', '14px');
+          .style('font-size', '12px');
       }
     });
 };

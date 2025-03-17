@@ -19,7 +19,7 @@ const TransferChart = () => {
 
     const width = svgRef.current.clientWidth;
     const height = svgRef.current.clientHeight;
-    const margin = { top: 0, right: 250, bottom: 0, left: 250 };
+    const margin = { top: 0, right: 200, bottom: 0, left: 200 };
 
     const svg = d3.select(svgRef.current);
     svg.selectAll('*').remove();

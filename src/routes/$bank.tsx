@@ -4,9 +4,15 @@ import { useTransferPartners } from '@/hooks/useTransferPartners';
 import { Switch } from '@/components/ui/switch';
 import { useState } from 'react';
 import SEO from '@/components/SEO';
+import { Spinner } from '@/components/Spinner';
 
 export const Route = createFileRoute('/$bank')({
   component: BankPage,
+  pendingComponent: () => (
+    <div className="animate-pulse text-muted-foreground">
+      <Spinner size="lg" />
+    </div>
+  ),
 });
 
 function BankPage() {
