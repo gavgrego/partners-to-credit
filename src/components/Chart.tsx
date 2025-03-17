@@ -1,6 +1,13 @@
 import { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
-import { createLabels, transformData, initializeSankey } from '@/utils';
+import { PARTNER_COLORS } from '@/constants';
+import {
+  createLabels,
+  createLinks,
+  createNodes,
+  transformData,
+  initializeSankey,
+} from '@/utils';
 
 const TransferChart = () => {
   const svgRef = useRef<SVGSVGElement>(null);
@@ -18,10 +25,22 @@ const TransferChart = () => {
     // Transform data and initialize sankey
     const { nodes, links } = transformData();
     const sankeyLayout = initializeSankey(width, height - margin.top, margin);
-    const { nodes: sankeyNodes } = sankeyLayout({
+    const { nodes: sankeyNodes, links: sankeyLinks } = sankeyLayout({
       nodes: nodes.map((d) => ({ ...d })),
       links: links.map((d) => ({ ...d })),
     });
+
+    // Create color scale for partners
+    const partnerColorScale = d3
+      .scaleOrdinal<string>()
+      .domain(nodes.map((n) => n.id))
+      .range(PARTNER_COLORS);
+
+    // Add links with hover effects
+    createLinks(svg, sankeyLinks, sankeyNodes, partnerColorScale);
+
+    // Add nodes with hover effects
+    createNodes(svg, sankeyNodes, partnerColorScale);
 
     // Add labels
     createLabels(svg, sankeyNodes, margin, width);

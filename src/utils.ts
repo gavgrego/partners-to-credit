@@ -89,7 +89,9 @@ export const transformData = () => {
 
 export const createLinks = (
   svg: d3.Selection<SVGSVGElement, unknown, null, undefined>,
-  links: Link[]
+  links: Link[],
+  nodes: Node[],
+  partnerColorScale: d3.ScaleOrdinal<string, string>
 ) => {
   return svg
     .append('g')
