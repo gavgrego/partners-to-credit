@@ -142,6 +142,14 @@ const TransferChart = () => {
     // Clear previous content
     d3.select(svgRef.current).selectAll('*').remove();
 
+    const svg = d3.select(svgRef.current);
+
+    // Create layers with specific order
+    const linkLayer = svg.append('g').attr('class', 'link-layer');
+    const nodeLayer = svg.append('g').attr('class', 'node-layer');
+    const labelLayer = svg.append('g').attr('class', 'label-layer');
+    const tooltipLayer = svg.append('g').attr('class', 'tooltip-layer'); // Will be on top
+
     // Create the Sankey generator
     const sankeyGenerator = sankey<Node, Link>()
       .nodeWidth(25)
@@ -155,17 +163,14 @@ const TransferChart = () => {
     const data = transformData();
     const { nodes, links } = sankeyGenerator(data);
 
-    const svg = d3.select(svgRef.current);
-
     // Create color scale for partners
     const partnerColorScale = d3
       .scaleOrdinal<string>()
       .domain(nodes.map((n) => n.id))
       .range(PARTNER_COLORS);
 
-    // Add links
-    const linkElements = svg
-      .append('g')
+    // Add links to link layer
+    const linkElements = linkLayer
       .selectAll('path')
       .data(links)
       .join('path')
@@ -202,10 +207,10 @@ const TransferChart = () => {
 
         const pathNode = this as SVGPathElement;
         const bbox = pathNode.getBBox();
-        const tooltipX = bbox.x + bbox.width / 2;
-        const tooltipY = bbox.y + bbox.height / 2;
+        let tooltipX = bbox.x + bbox.width / 2;
+        let tooltipY = bbox.y + bbox.height / 2;
 
-        svg.selectAll('.link-tooltip').remove();
+        tooltipLayer.selectAll('.link-tooltip').remove();
 
         const tooltipGroup = svg
           .append('g')
@@ -213,97 +218,51 @@ const TransferChart = () => {
           .attr('transform', `translate(${tooltipX}, ${tooltipY})`)
           .style('pointer-events', 'none');
 
-        // Create temporary text to measure total width
-        const tempGroup = tooltipGroup
-          .append('g')
-          .style('visibility', 'hidden');
-
-        // Measure partner name
-        const partnerText = tempGroup
+        // Create temporary text to measure width
+        const tooltipText = `${bankNode.id}    ${ratio}    ${partnerNode.id}`;
+        const tempText = tooltipGroup
           .append('text')
+          .style('visibility', 'hidden')
           .style('font-family', 'Geist Mono')
           .style('font-size', '12px')
-          .text(partnerNode.id + ' ');
-        const partnerWidth = partnerText.node()?.getComputedTextLength() ?? 0;
+          .text(tooltipText);
 
-        // Measure ratio with bigger, bold font
-        const ratioText = tempGroup
-          .append('text')
-          .style('font-family', 'Geist Mono')
-          .style('font-size', '14px')
-          .style('font-weight', 'bold')
-          .text(ratio);
-        const ratioWidth = ratioText.node()?.getComputedTextLength() ?? 0;
-
-        // Measure bank name
-        const bankText = tempGroup
-          .append('text')
-          .style('font-family', 'Geist Mono')
-          .style('font-size', '12px')
-          .text(' ' + bankNode.id);
-        const bankWidth = bankText.node()?.getComputedTextLength() ?? 0;
-
-        const totalWidth = partnerWidth + ratioWidth + bankWidth;
-        tempGroup.remove();
+        const textWidth = tempText.node()?.getComputedTextLength() ?? 0;
+        tempText.remove();
 
         // Add background rectangle with calculated width
         tooltipGroup
           .append('rect')
-          .attr('x', -(totalWidth / 2 + 10))
+          .attr('x', -(textWidth / 2 + 10))
           .attr('y', -12)
-          .attr('width', totalWidth + 20)
+          .attr('width', textWidth + 20)
           .attr('height', 24)
           .attr('rx', 4)
           .attr('fill', '#1f2937')
           .attr('opacity', 0.9);
 
-        // Add partner name
-        tooltipGroup
-          .append('text')
-          .attr('text-anchor', 'end')
-          .attr('x', -ratioWidth / 2 - 5)
-          .attr('y', 0)
-          .attr('dominant-baseline', 'middle')
-          .style('fill', '#e5e7eb')
-          .style('font-family', 'Geist Mono')
-          .style('font-size', '12px')
-          .text(partnerNode.id);
-
-        // Add ratio with bigger, bold font
+        // Add text with swapped order
         tooltipGroup
           .append('text')
           .attr('text-anchor', 'middle')
-          .attr('x', 0)
-          .attr('y', 0)
-          .attr('dominant-baseline', 'middle')
-          .style('fill', '#e5e7eb')
-          .style('font-family', 'Geist Mono')
-          .style('font-size', '14px')
-          .style('font-weight', 'bold')
-          .text(ratio);
-
-        // Add bank name
-        tooltipGroup
-          .append('text')
-          .attr('text-anchor', 'start')
-          .attr('x', ratioWidth / 2 + 5)
-          .attr('y', 0)
           .attr('dominant-baseline', 'middle')
           .style('fill', '#e5e7eb')
           .style('font-family', 'Geist Mono')
           .style('font-size', '12px')
-          .text(bankNode.id);
+          .html(
+            `${bankNode.id}    <tspan style="font-size: 14px; font-weight: bold">${ratio}</tspan>    ${partnerNode.id}`
+          );
       })
       .on('mouseout', function () {
         // Reset all visual states
         nodeElements.style('opacity', 1);
         linkElements.style('stroke', '#aaa').style('stroke-opacity', 0.15);
+        // Make sure we remove ALL tooltips
         svg.selectAll('.link-tooltip').remove();
       });
 
-    // Add nodes with hover functionality
-    const nodeElements = svg
-      .append('g')
+    // Add nodes to node layer
+    const nodeElements = nodeLayer
       .selectAll('rect')
       .data(nodes)
       .join('rect')
@@ -357,11 +316,12 @@ const TransferChart = () => {
         // Reset all visual states
         nodeElements.style('opacity', 1);
         linkElements.style('stroke', '#aaa').style('stroke-opacity', 0.15);
+        // Make sure we remove tooltips here too
+        svg.selectAll('.link-tooltip').remove();
       });
 
     // Add external labels with logos
-    svg
-      .append('g')
+    labelLayer
       .selectAll('g')
       .data(nodes)
       .join('g')
