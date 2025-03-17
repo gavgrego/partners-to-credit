@@ -106,19 +106,17 @@ export const createLinks = (
     .style('pointer-events', 'all')
     .on('mouseover', function (event: MouseEvent, d: any) {
       const path = d3.select(this);
-      path.style('stroke-opacity', 0.5).style('stroke', '#60a5fa');
+      const bankNode = d.source.category === 'Banks' ? d.source : d.target;
+      const bankColor = BRAND_COLORS[bankNode.id] || '#60a5fa';
+      path.style('stroke-opacity', 0.5).style('stroke', bankColor);
 
       const sourceNode = d.source;
       const targetNode = d.target;
 
       // Find the actual transfer partner data
-      const bankNode =
-        sourceNode.category === 'Banks' ? sourceNode : targetNode;
-      const partnerNode =
-        sourceNode.category === 'Banks' ? targetNode : sourceNode;
       const bankData = transferPartners.find((p) => p.name === bankNode.id);
       const partnerData = bankData?.partners.find(
-        (p) => p.name === partnerNode.id
+        (p) => p.name === sourceNode.id || p.name === targetNode.id
       );
 
       const [x, y] = d3.pointer(event, svg.node());
