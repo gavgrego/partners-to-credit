@@ -1,0 +1,51 @@
+import { Card } from '@/components/ui/card';
+import { createFileRoute } from '@tanstack/react-router';
+import { transferPartners } from '@/data/transferPartners';
+
+export const Route = createFileRoute('/$bank')({
+  component: BankPage,
+});
+
+function BankPage() {
+  const { bank } = Route.useParams();
+  const bankData = transferPartners.find(
+    (p) => p.name.toLowerCase().replace(/\s+/g, '-') === bank.toLowerCase()
+  );
+
+  if (!bankData) {
+    return <div>Bank not found</div>;
+  }
+
+  return (
+    <div className="mx-auto py-8 text-foreground w-full">
+      <h1 className="text-4xl font-bold mb-6">
+        {bankData.name} Transfer Partners
+      </h1>
+      <p className="text-lg mb-8">
+        Transfer your {bankData.pointsName} to the following partners:
+      </p>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {bankData.partners.map((partner) => (
+          <Card key={partner.name} className="p-6 flex flex-col">
+            <h3 className="text-lg font-semibold mb-2">{partner.name}</h3>
+
+            <div className="mt-auto">
+              <span className="font-medium">
+                Transfer Ratio:{' '}
+                <span className={partner.bonus ? 'line-through' : ''}>
+                  {partner.transferRatio}
+                </span>
+                {partner.bonus && (
+                  <span className="text-red-500 ml-2">
+                    Current bonus! {partner.bonus} until {partner.bonusUntil}
+                  </span>
+                )}
+              </span>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </div>
+  );
+}

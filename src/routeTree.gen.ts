@@ -11,9 +11,16 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as BankImport } from './routes/$bank'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
+
+const BankRoute = BankImport.update({
+  id: '/$bank',
+  path: '/$bank',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const IndexRoute = IndexImport.update({
   id: '/',
@@ -32,6 +39,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/$bank': {
+      id: '/$bank'
+      path: '/$bank'
+      fullPath: '/$bank'
+      preLoaderRoute: typeof BankImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -39,32 +53,37 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/$bank': typeof BankRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/$bank': typeof BankRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/$bank': typeof BankRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/$bank'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/$bank'
+  id: '__root__' | '/' | '/$bank'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BankRoute: typeof BankRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BankRoute: BankRoute,
 }
 
 export const routeTree = rootRoute
@@ -77,11 +96,15 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/"
+        "/",
+        "/$bank"
       ]
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/$bank": {
+      "filePath": "$bank.tsx"
     }
   }
 }

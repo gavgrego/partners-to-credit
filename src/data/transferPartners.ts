@@ -1,4 +1,4 @@
-import { CreditCardProgram } from '@/types/types';
+import { CreditCardProgram } from '@/types';
 
 export const transferPartners: CreditCardProgram[] = [
   {
@@ -8,10 +8,11 @@ export const transferPartners: CreditCardProgram[] = [
       {
         name: 'Aer Lingus AerClub',
         category: 'Airlines',
+
         transferRatio: '1:1',
       },
       {
-        name: 'Aeromexico Rewards',
+        name: 'Aeromexico Club Premier',
         category: 'Airlines',
         transferRatio: '1:1.6',
       },
@@ -82,6 +83,8 @@ export const transferPartners: CreditCardProgram[] = [
       },
       {
         name: 'Qatar Airways Privilege Club',
+        bonus: '1:1.2',
+        bonusUntil: '2025-03-31',
         category: 'Airlines',
         transferRatio: '1:1',
       },
@@ -119,6 +122,8 @@ export const transferPartners: CreditCardProgram[] = [
       {
         name: 'Aer Lingus AerClub',
         category: 'Airlines',
+        bonus: '1:1.2',
+        bonusUntil: '2025-03-31',
         transferRatio: '1:1',
       },
       {
@@ -135,6 +140,8 @@ export const transferPartners: CreditCardProgram[] = [
         name: 'British Airways Executive Club',
         category: 'Airlines',
         transferRatio: '1:1',
+        bonus: '1:1.2',
+        bonusUntil: '2025-03-31',
       },
       {
         name: 'Emirates Skywards',
@@ -144,6 +151,8 @@ export const transferPartners: CreditCardProgram[] = [
       {
         name: 'Iberia Plus',
         category: 'Airlines',
+        bonus: '1:1.2',
+        bonusUntil: '2025-03-31',
         transferRatio: '1:1',
       },
       {
@@ -180,6 +189,8 @@ export const transferPartners: CreditCardProgram[] = [
         name: 'Marriott Bonvoy',
         category: 'Hotels',
         transferRatio: '1:1',
+        bonus: '1:1.5',
+        bonusUntil: '2025-03-31',
       },
       {
         name: 'World of Hyatt',
@@ -224,6 +235,8 @@ export const transferPartners: CreditCardProgram[] = [
       },
       {
         name: 'Etihad Guest',
+        bonus: '1:1.4',
+        bonusUntil: '2025-03-31',
         category: 'Airlines',
         transferRatio: '1:1',
       },
@@ -402,6 +415,8 @@ export const transferPartners: CreditCardProgram[] = [
       {
         name: 'Avianca LifeMiles',
         category: 'Airlines',
+        bonus: '1:1.25',
+        bonusUntil: '2025-04-12',
         transferRatio: '1:1',
       },
       {
