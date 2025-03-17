@@ -7,6 +7,9 @@ import {
   NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu';
 import { Link } from '@tanstack/react-router';
+import { Tooltip } from '@radix-ui/react-tooltip';
+import { TooltipContent } from '@radix-ui/react-tooltip';
+import { TooltipProvider, TooltipTrigger } from '@radix-ui/react-tooltip';
 
 const Header = () => {
   return (
@@ -22,7 +25,7 @@ const Header = () => {
               <NavigationMenuTrigger>
                 Transfer From&nbsp;&nbsp;
               </NavigationMenuTrigger>
-              <NavigationMenuContent className="[&_div]:py-1">
+              <NavigationMenuContent className="[&_div]:p-1">
                 {/* @ts-ignore */}
                 <Link to="/american-express">
                   <div>American Express</div>
@@ -47,6 +50,14 @@ const Header = () => {
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
+        <TooltipProvider>
+          <Tooltip delayDuration={0}>
+            <TooltipTrigger className="text-2xl">🇺🇸</TooltipTrigger>
+            <TooltipContent side="right" sideOffset={16}>
+              <p>We currently only support US-based credit cards.</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       </header>
     </div>
   );
