@@ -103,6 +103,7 @@ export const transferPartners: CreditCardProgram[] = [
       {
         name: 'Qatar Airways Privilege Club',
         bonus: '1:1.2',
+        bonusPercent: 20,
         alliance: 'OneWorld',
 
         bonusUntil: '2025-03-31',
@@ -148,6 +149,7 @@ export const transferPartners: CreditCardProgram[] = [
         name: 'Aer Lingus AerClub',
         category: 'Airlines',
         bonus: '1:1.2',
+        bonusPercent: 20,
         bonusUntil: '2025-03-31',
         transferRatio: '1:1',
       },
@@ -172,6 +174,7 @@ export const transferPartners: CreditCardProgram[] = [
 
         transferRatio: '1:1',
         bonus: '1:1.2',
+        bonusPercent: 20,
         bonusUntil: '2025-03-31',
       },
       {
@@ -183,6 +186,7 @@ export const transferPartners: CreditCardProgram[] = [
         name: 'Iberia Plus',
         category: 'Airlines',
         bonus: '1:1.2',
+        bonusPercent: 20,
         bonusUntil: '2025-03-31',
         transferRatio: '1:1',
       },
@@ -227,6 +231,7 @@ export const transferPartners: CreditCardProgram[] = [
         category: 'Hotels',
         transferRatio: '1:1',
         bonus: '1:1.5',
+        bonusPercent: 50,
         bonusUntil: '2025-03-31',
       },
       {
@@ -282,6 +287,7 @@ export const transferPartners: CreditCardProgram[] = [
       {
         name: 'Etihad Guest',
         bonus: '1:1.4',
+        bonusPercent: 40,
         bonusUntil: '2025-03-31',
         category: 'Airlines',
         transferRatio: '1:1',
@@ -501,8 +507,9 @@ export const transferPartners: CreditCardProgram[] = [
         name: 'Avianca LifeMiles',
         category: 'Airlines',
         bonus: '1:1.25',
-        alliance: 'Star Alliance',
+        bonusPercent: 25,
         bonusUntil: '2025-04-12',
+        alliance: 'Star Alliance',
         transferRatio: '1:1',
       },
       {

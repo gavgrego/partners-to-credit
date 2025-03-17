@@ -25,7 +25,7 @@ const SEO = ({
       <title>{siteTitle}</title>
       <meta name="description" content={description} />
       <link rel="canonical" href={canonical} />
-      <link rel="icon" href="/logo.svg" />
+      <link rel="icon" type="image/svg+xml" href="/logo.svg" />
       <meta property="og:title" content={siteTitle} />
       <meta property="og:description" content={description} />
       <meta property="og:type" content={type} />

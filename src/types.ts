@@ -2,6 +2,7 @@ type TransferPartner = {
   name: string;
   bonus?: string;
   bonusUntil?: string;
+  bonusPercent?: number;
   transferRatio?: string;
   alliance?: 'Star Alliance' | 'OneWorld' | 'SkyTeam';
   category: 'Airlines' | 'Hotels';

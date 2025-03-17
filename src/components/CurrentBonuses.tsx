@@ -26,6 +26,7 @@ const CurrentBonuses = () => {
           originalRatio: partner.transferRatio,
           bonus: partner.bonus,
           validUntil: partner.bonusUntil,
+          bonusPercent: partner.bonusPercent,
         }))
     ) ?? [];
 
@@ -52,7 +53,10 @@ const CurrentBonuses = () => {
               <CardContent>
                 <p className="text-sm text-muted-foreground">
                   <span className="line-through">{bonus.originalRatio}</span>{' '}
-                  <span className="text-red-500 font-bold">{bonus.bonus}</span>
+                  <span className="text-green-500 font-bold">
+                    {bonus.bonus} a{' '}
+                    <span className="text-lg">{bonus.bonusPercent}%</span> bonus
+                  </span>
                 </p>
                 <p className="text-sm text-muted-foreground">
                   Valid until{' '}
