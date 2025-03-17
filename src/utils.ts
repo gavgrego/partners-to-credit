@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 import { sankey, sankeyLinkHorizontal } from 'd3-sankey';
 import { transferPartners } from '@/data/transferPartners';
-import { BRAND_COLORS, PARTNER_COLORS, BRAND_LOGOS } from './constants';
+import { BRAND_COLORS, BRAND_LOGOS } from './constants';
 import type { Node, Link } from './types';
 import { createTooltip, removeTooltip } from '@/components/Tooltip';
 
@@ -89,9 +89,7 @@ export const transformData = () => {
 
 export const createLinks = (
   svg: d3.Selection<SVGSVGElement, unknown, null, undefined>,
-  links: Link[],
-  nodes: Node[],
-  partnerColorScale: d3.ScaleOrdinal<string, string>
+  links: Link[]
 ) => {
   return svg
     .append('g')
@@ -160,7 +158,7 @@ export const createNodes = (
     .attr('width', (d) => (d.x1 ?? 0) - (d.x0 ?? 0))
     .attr('fill', (d) => BRAND_COLORS[d.id] || partnerColorScale(d.id))
     .style('cursor', 'pointer')
-    .on('mouseover', function (event: MouseEvent, d: Node) {
+    .on('mouseover', function (_: MouseEvent, d: Node) {
       const rect = d3.select(this);
       rect.style('opacity', 0.8);
 
@@ -211,7 +209,7 @@ export const initializeSankey = (
       [margin.left, margin.top],
       [width - margin.right, height - margin.bottom],
     ])
-    .nodeSort((a, b) => 0); // Keep nodes in their original order
+    .nodeSort(() => 0); // Keep nodes in their original order
 };
 
 export const createLabels = (
