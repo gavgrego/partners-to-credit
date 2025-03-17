@@ -29,10 +29,10 @@ interface Link extends d3.SimulationLinkDatum<Node> {
 // Define color schemes
 const BRAND_COLORS: Record<string, string> = {
   'American Express': '#006FCF', // Amex Blue
-  Chase: '#117ACA', // Chase Blue
+  Chase: '#FFFFFF', // White
   'Capital One': '#C3002F', // Capital One Red
   Bilt: '#374151', // Dark grey (gray-700)
-  Citi: '#006FCF', // Citi Blue
+  Citi: '#FF6B1B', // Citi Orange
 };
 
 const BRAND_LOGOS: Record<string, string> = {
@@ -57,12 +57,14 @@ const transformData = (): SankeyGraph<Node, Link> => {
   const nodes: Node[] = [];
   const links: Link[] = [];
 
-  // First add all bank nodes
-  const bankNodes = transferPartners.map((program, i) => ({
-    id: program.name,
-    index: i,
-    category: 'Banks' as const,
-  }));
+  // First add all bank nodes, sorted alphabetically
+  const bankNodes = transferPartners
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .map((program, i) => ({
+      id: program.name,
+      index: i,
+      category: 'Banks' as const,
+    }));
   nodes.push(...bankNodes);
 
   // Get all partners and sort them alphabetically
@@ -173,10 +175,10 @@ const TransferChart = () => {
       .style('stroke-width', (d) => Math.max(1, d.width ?? 0))
       .style('stroke-opacity', 0.15)
       .style('cursor', 'pointer')
-      .on('mouseover', function (event: MouseEvent, d: SankeyLink<Node, Link>) {
+      .on('mouseover', function (event: MouseEvent, d: any) {
         const link = d3.select(this);
-        const source = d.source as unknown as Node;
-        const target = d.target as unknown as Node;
+        const source = d.source as Node;
+        const target = d.target as Node;
 
         // Highlight only this link
         linkElements.style('stroke-opacity', (l) => (l === d ? 0.8 : 0.15));
@@ -191,36 +193,106 @@ const TransferChart = () => {
         );
 
         // Show transfer ratio tooltip
-        const partner = transferPartners.find(
-          (p) =>
-            p.name === (source.category === 'Banks' ? source.id : target.id)
-        );
+        const bankNode = source.category === 'Banks' ? source : target;
+        const partner = transferPartners.find((p) => p.name === bankNode.id);
+        const partnerNode = source.category === 'Banks' ? target : source;
         const ratio =
-          partner?.partners.find(
-            (p) =>
-              p.name === (source.category === 'Banks' ? target.id : source.id)
-          )?.transferRatio || '1:1';
+          partner?.partners.find((p) => p.name === partnerNode.id)
+            ?.transferRatio || '1:1';
 
-        const pathNode = link.node() as SVGPathElement;
-        if (pathNode) {
-          const bbox = pathNode.getBBox();
-          const tooltipX = bbox.x + bbox.width / 2;
-          const tooltipY = bbox.y + bbox.height / 2;
+        const pathNode = this as SVGPathElement;
+        const bbox = pathNode.getBBox();
+        const tooltipX = bbox.x + bbox.width / 2;
+        const tooltipY = bbox.y + bbox.height / 2;
 
-          svg
-            .append('g')
-            .attr('class', 'link-tooltip')
-            .append('text')
-            .attr('x', tooltipX)
-            .attr('y', tooltipY)
-            .attr('text-anchor', 'middle')
-            .attr('dominant-baseline', 'middle')
-            .style('fill', '#e5e7eb')
-            .style('font-family', 'Geist Mono')
-            .style('font-size', '12px')
-            .style('pointer-events', 'none')
-            .text(ratio);
-        }
+        svg.selectAll('.link-tooltip').remove();
+
+        const tooltipGroup = svg
+          .append('g')
+          .attr('class', 'link-tooltip')
+          .attr('transform', `translate(${tooltipX}, ${tooltipY})`)
+          .style('pointer-events', 'none');
+
+        // Create temporary text to measure total width
+        const tempGroup = tooltipGroup
+          .append('g')
+          .style('visibility', 'hidden');
+
+        // Measure partner name
+        const partnerText = tempGroup
+          .append('text')
+          .style('font-family', 'Geist Mono')
+          .style('font-size', '12px')
+          .text(partnerNode.id + ' ');
+        const partnerWidth = partnerText.node()?.getComputedTextLength() ?? 0;
+
+        // Measure ratio with bigger, bold font
+        const ratioText = tempGroup
+          .append('text')
+          .style('font-family', 'Geist Mono')
+          .style('font-size', '14px')
+          .style('font-weight', 'bold')
+          .text(ratio);
+        const ratioWidth = ratioText.node()?.getComputedTextLength() ?? 0;
+
+        // Measure bank name
+        const bankText = tempGroup
+          .append('text')
+          .style('font-family', 'Geist Mono')
+          .style('font-size', '12px')
+          .text(' ' + bankNode.id);
+        const bankWidth = bankText.node()?.getComputedTextLength() ?? 0;
+
+        const totalWidth = partnerWidth + ratioWidth + bankWidth;
+        tempGroup.remove();
+
+        // Add background rectangle with calculated width
+        tooltipGroup
+          .append('rect')
+          .attr('x', -(totalWidth / 2 + 10))
+          .attr('y', -12)
+          .attr('width', totalWidth + 20)
+          .attr('height', 24)
+          .attr('rx', 4)
+          .attr('fill', '#1f2937')
+          .attr('opacity', 0.9);
+
+        // Add partner name
+        tooltipGroup
+          .append('text')
+          .attr('text-anchor', 'end')
+          .attr('x', -ratioWidth / 2 - 5)
+          .attr('y', 0)
+          .attr('dominant-baseline', 'middle')
+          .style('fill', '#e5e7eb')
+          .style('font-family', 'Geist Mono')
+          .style('font-size', '12px')
+          .text(partnerNode.id);
+
+        // Add ratio with bigger, bold font
+        tooltipGroup
+          .append('text')
+          .attr('text-anchor', 'middle')
+          .attr('x', 0)
+          .attr('y', 0)
+          .attr('dominant-baseline', 'middle')
+          .style('fill', '#e5e7eb')
+          .style('font-family', 'Geist Mono')
+          .style('font-size', '14px')
+          .style('font-weight', 'bold')
+          .text(ratio);
+
+        // Add bank name
+        tooltipGroup
+          .append('text')
+          .attr('text-anchor', 'start')
+          .attr('x', ratioWidth / 2 + 5)
+          .attr('y', 0)
+          .attr('dominant-baseline', 'middle')
+          .style('fill', '#e5e7eb')
+          .style('font-family', 'Geist Mono')
+          .style('font-size', '12px')
+          .text(bankNode.id);
       })
       .on('mouseout', function () {
         // Reset all visual states
@@ -229,7 +301,7 @@ const TransferChart = () => {
         svg.selectAll('.link-tooltip').remove();
       });
 
-    // Add nodes
+    // Add nodes with hover functionality
     const nodeElements = svg
       .append('g')
       .selectAll('rect')
@@ -240,11 +312,8 @@ const TransferChart = () => {
       .attr('height', (d) => (d.y1 ?? 0) - (d.y0 ?? 0))
       .attr('width', (d) => (d.x1 ?? 0) - (d.x0 ?? 0))
       .attr('fill', (d) => BRAND_COLORS[d.id] || partnerColorScale(d.id))
-      .style('cursor', 'pointer');
-
-    // Add hover effects for nodes
-    nodeElements
-      .on('mouseover', function (event: MouseEvent, d: SankeyNode<Node, Link>) {
+      .style('cursor', 'pointer')
+      .on('mouseover', function (event: MouseEvent, d: Node) {
         const node = d3.select(this);
         node.style('opacity', 0.8);
 
@@ -257,22 +326,22 @@ const TransferChart = () => {
 
         // Highlight connected links
         linkElements
-          .style('stroke', (l: SankeyLink<Node, Link>) => {
-            const source = l.source as unknown as Node;
-            const target = l.target as unknown as Node;
+          .style('stroke', (l: any) => {
+            const source = l.source as Node;
+            const target = l.target as Node;
             if (source.id === d.id || target.id === d.id) {
               return BRAND_COLORS[d.id] || partnerColorScale(d.id);
             }
             return '#aaa';
           })
-          .style('stroke-opacity', (l: SankeyLink<Node, Link>) => {
-            const source = l.source as unknown as Node;
-            const target = l.target as unknown as Node;
+          .style('stroke-opacity', (l: any) => {
+            const source = l.source as Node;
+            const target = l.target as Node;
             return source.id === d.id || target.id === d.id ? 0.8 : 0.15;
           });
 
         // Highlight connected nodes
-        nodeElements.style('opacity', (n: SankeyNode<Node, Link>) => {
+        nodeElements.style('opacity', (n: any) => {
           const isConnected = links.some((l) => {
             const source = l.source as unknown as Node;
             const target = l.target as unknown as Node;
@@ -288,7 +357,6 @@ const TransferChart = () => {
         // Reset all visual states
         nodeElements.style('opacity', 1);
         linkElements.style('stroke', '#aaa').style('stroke-opacity', 0.15);
-        svg.selectAll('.link-tooltip').remove();
       });
 
     // Add external labels with logos
