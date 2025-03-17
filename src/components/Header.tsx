@@ -10,7 +10,7 @@ import { Link } from '@tanstack/react-router';
 
 const Header = () => {
   return (
-    <div className="shadow-sm mx-auto px-4 pt-2 sm:px-6 lg:px-8">
+    <div className="shadow-sm mx-auto px-4 pt-4 sm:px-6 lg:px-8">
       <header className="flex items-center justify-start gap-2 text-foreground">
         <Link to="/" className="flex items-center gap-2">
           <ArrowLeftRight className="animate-[wiggle_1s_ease-in-out_infinite]" />
@@ -19,7 +19,9 @@ const Header = () => {
         <NavigationMenu>
           <NavigationMenuList>
             <NavigationMenuItem>
-              <NavigationMenuTrigger>Banks&nbsp;&nbsp;</NavigationMenuTrigger>
+              <NavigationMenuTrigger>
+                Transfer From&nbsp;&nbsp;
+              </NavigationMenuTrigger>
               <NavigationMenuContent className="[&_div]:py-1">
                 {/* @ts-ignore */}
                 <Link to="/american-express">
