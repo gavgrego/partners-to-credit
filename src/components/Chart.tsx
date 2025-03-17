@@ -8,12 +8,14 @@ import {
   initializeSankey,
 } from '@/utils';
 import { PARTNER_COLORS } from '@/constants';
+import { useTransferPartners } from '@/hooks/useTransferPartners';
 
 const TransferChart = () => {
   const svgRef = useRef<SVGSVGElement>(null);
+  const { data: transferPartners, isLoading } = useTransferPartners();
 
   useEffect(() => {
-    if (!svgRef.current) return;
+    if (!svgRef.current || !transferPartners) return;
 
     const width = svgRef.current.clientWidth;
     const height = svgRef.current.clientHeight;
@@ -23,7 +25,7 @@ const TransferChart = () => {
     svg.selectAll('*').remove();
 
     // Transform data and initialize sankey
-    const { nodes, links } = transformData();
+    const { nodes, links } = transformData(transferPartners);
     const sankeyLayout = initializeSankey(width, height - margin.top, margin);
     const { nodes: sankeyNodes, links: sankeyLinks } = sankeyLayout({
       nodes: nodes.map((d) => ({ ...d })),
@@ -37,7 +39,7 @@ const TransferChart = () => {
       .range(PARTNER_COLORS);
 
     // Add links with hover effects
-    createLinks(svg, sankeyLinks);
+    createLinks(svg, sankeyLinks, transferPartners);
 
     // Add nodes with hover effects
     createNodes(svg, sankeyNodes, partnerColorScale);
@@ -47,7 +49,15 @@ const TransferChart = () => {
 
     // Adjust the SVG viewBox to prevent tooltip clipping
     svg.attr('viewBox', `0 -40 ${width} ${height + 80}`);
-  }, []);
+  }, [transferPartners]);
+
+  if (isLoading) {
+    return (
+      <div className="w-full h-[900px] flex items-center justify-center">
+        <div className="text-lg text-muted-foreground">Loading chart...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full h-[900px] relative">

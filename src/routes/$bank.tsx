@@ -1,6 +1,6 @@
 import { Card } from '@/components/ui/card';
 import { createFileRoute } from '@tanstack/react-router';
-import { transferPartners } from '@/data/transferPartners';
+import { useTransferPartners } from '@/hooks/useTransferPartners';
 
 export const Route = createFileRoute('/$bank')({
   component: BankPage,
@@ -8,9 +8,23 @@ export const Route = createFileRoute('/$bank')({
 
 function BankPage() {
   const { bank } = Route.useParams();
-  const bankData = transferPartners.find(
+  const { data: transferPartners, isLoading } = useTransferPartners();
+
+  if (isLoading) {
+    return (
+      <div className="mx-auto py-8 text-foreground w-full">
+        <div className="text-lg text-muted-foreground">
+          Loading bank data...
+        </div>
+      </div>
+    );
+  }
+
+  const bankData = transferPartners?.find(
     (p) => p.name.toLowerCase().replace(/\s+/g, '-') === bank.toLowerCase()
   );
+
+  const bankLogo = bankData?.source;
 
   if (!bankData) {
     return <div>Bank not found</div>;
@@ -18,7 +32,8 @@ function BankPage() {
 
   return (
     <div className="mx-auto py-8 text-foreground w-full">
-      <h1 className="text-4xl font-bold mb-6">
+      <h1 className="text-4xl font-bold mb-6 flex items-center gap-4">
+        <img src={bankLogo} alt={bankData.name} className="w-10 h-10" />
         {bankData.name} Transfer Partners
       </h1>
       <p className="text-lg mb-8">
@@ -33,7 +48,11 @@ function BankPage() {
             <div className="mt-auto">
               <span className="font-medium">
                 Transfer Ratio:{' '}
-                <span className={partner.bonus ? 'line-through' : ''}>
+                <span
+                  className={
+                    partner.bonus ? 'line-through' : 'text-green-500 font-bold'
+                  }
+                >
                   {partner.transferRatio}
                 </span>
                 {partner.bonus && (

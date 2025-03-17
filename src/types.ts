@@ -3,12 +3,14 @@ type TransferPartner = {
   bonus?: string;
   bonusUntil?: string;
   transferRatio?: string;
+  alliance?: 'Star Alliance' | 'OneWorld' | 'SkyTeam';
   category: 'Airlines' | 'Hotels';
 };
 
 export type CreditCardProgram = {
   name: string;
   pointsName: string;
+  source: string;
   partners: TransferPartner[];
 };
 

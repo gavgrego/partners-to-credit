@@ -1,11 +1,10 @@
 import * as d3 from 'd3';
 import { sankey, sankeyLinkHorizontal } from 'd3-sankey';
-import { transferPartners } from '@/data/transferPartners';
 import { BRAND_COLORS, BRAND_LOGOS } from './constants';
-import type { Node, Link } from './types';
+import type { Node, Link, CreditCardProgram } from './types';
 import { createTooltip, removeTooltip } from '@/components/Tooltip';
 
-export const transformData = () => {
+export const transformData = (transferPartners: CreditCardProgram[]) => {
   const nodes: Node[] = [];
   const links: Link[] = [];
 
@@ -22,13 +21,14 @@ export const transformData = () => {
   // Get all partners and sort them alphabetically
   const partnerMap = new Map<
     string,
-    { name: string; category: 'Airlines' | 'Hotels' }
+    { name: string; category: 'Airlines' | 'Hotels'; alliance?: string }
   >();
   transferPartners.forEach((program) => {
     program.partners.forEach((partner) => {
       partnerMap.set(partner.name, {
         name: partner.name,
         category: partner.category as 'Airlines' | 'Hotels',
+        alliance: partner.alliance,
       });
     });
   });
@@ -89,7 +89,8 @@ export const transformData = () => {
 
 export const createLinks = (
   svg: d3.Selection<SVGSVGElement, unknown, null, undefined>,
-  links: Link[]
+  links: Link[],
+  transferPartners: CreditCardProgram[]
 ) => {
   return svg
     .append('g')

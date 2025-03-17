@@ -1,18 +1,33 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { transferPartners } from '@/data/transferPartners';
+import { useTransferPartners } from '@/hooks/useTransferPartners';
 
 const CurrentBonuses = () => {
-  const bonuses = transferPartners.flatMap((program) =>
-    program.partners
-      .filter((partner) => partner.bonus)
-      .map((partner) => ({
-        name: partner.name,
-        bank: program.name,
-        originalRatio: partner.transferRatio,
-        bonus: partner.bonus,
-        validUntil: partner.bonusUntil,
-      }))
-  );
+  const { data: transferPartners, isLoading } = useTransferPartners();
+
+  if (isLoading) {
+    return (
+      <div className="w-full relative space-y-6">
+        <h2 className="text-3xl font-bold text-foreground">
+          Current or Recent Transfer Bonuses
+        </h2>
+        <p className="text-muted-foreground">Loading bonuses...</p>
+      </div>
+    );
+  }
+
+  const bonuses =
+    transferPartners?.flatMap((program) =>
+      program.partners
+        .filter((partner) => partner.bonus)
+        .map((partner) => ({
+          name: partner.name,
+          source: program.source,
+          bank: program.name,
+          originalRatio: partner.transferRatio,
+          bonus: partner.bonus,
+          validUntil: partner.bonusUntil,
+        }))
+    ) ?? [];
 
   return (
     <div className="w-full relative space-y-6">
@@ -27,31 +42,24 @@ const CurrentBonuses = () => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {bonuses.map((bonus) => (
-            <Card key={`${bonus.name}-${bonus.bank}`}>
-              <CardHeader className="space-y-1">
-                <div className="flex items-center justify-between">
-                  <CardTitle className="text-xl">{bonus.name}</CardTitle>
-                  <span className="text-sm text-muted-foreground">
-                    {bonus.bank}
-                  </span>
-                </div>
+            <Card key={`${bonus.bank}-${bonus.name}`}>
+              <CardHeader>
+                <CardTitle className="text-lg flex gap-3 items-start">
+                  <img src={bonus.source} width={30} />
+                  {bonus.bank} → {bonus.name}
+                </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-2">
-                <p className="text-lg">
-                  {bonus.originalRatio && (
-                    <span className="line-through mr-2">
-                      {bonus.originalRatio}
-                    </span>
-                  )}
-                  <span className="text-red-500 font-medium">
-                    {bonus.originalRatio ? `→ ${bonus.bonus}` : 'Bonus active!'}
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  <span className="line-through">{bonus.originalRatio}</span>{' '}
+                  <span className="text-red-500 font-bold">{bonus.bonus}</span>
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  Valid until{' '}
+                  <span className="font-black text-foreground">
+                    {bonus.validUntil}
                   </span>
                 </p>
-                {bonus.validUntil && (
-                  <p className="text-sm text-muted-foreground">
-                    Valid until {bonus.validUntil}
-                  </p>
-                )}
               </CardContent>
             </Card>
           ))}

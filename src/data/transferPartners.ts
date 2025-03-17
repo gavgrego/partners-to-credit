@@ -4,51 +4,65 @@ export const transferPartners: CreditCardProgram[] = [
   {
     name: 'American Express',
     pointsName: 'Membership Rewards',
+    source: '/amex.svg',
     partners: [
       {
         name: 'Aer Lingus AerClub',
         category: 'Airlines',
-
         transferRatio: '1:1',
       },
       {
         name: 'Aeromexico Club Premier',
         category: 'Airlines',
+        alliance: 'SkyTeam',
         transferRatio: '1:1.6',
       },
       {
         name: 'Air Canada Aeroplan',
         category: 'Airlines',
+        alliance: 'Star Alliance',
         transferRatio: '1:1',
       },
       {
         name: 'Air France/KLM Flying Blue',
         category: 'Airlines',
+        alliance: 'SkyTeam',
+
         transferRatio: '1:1',
       },
       {
         name: 'ANA Mileage Club',
         category: 'Airlines',
+        alliance: 'Star Alliance',
+
         transferRatio: '1:1',
       },
       {
         name: 'Avianca LifeMiles',
         category: 'Airlines',
+        alliance: 'Star Alliance',
+
         transferRatio: '1:1',
       },
       {
         name: 'British Airways Executive Club',
         category: 'Airlines',
+        alliance: 'OneWorld',
+
         transferRatio: '1:1',
       },
       {
         name: 'Cathay Pacific Asia Miles',
         category: 'Airlines',
+        alliance: 'OneWorld',
+
         transferRatio: '1:1',
       },
       {
         name: 'Delta SkyMiles',
         category: 'Airlines',
+        alliance: 'SkyTeam',
+
         transferRatio: '1:1',
       },
       {
@@ -62,28 +76,35 @@ export const transferPartners: CreditCardProgram[] = [
         transferRatio: '1:1',
       },
       {
-        name: 'HawaiianMiles',
+        name: 'HawaiianMiles (Alaska Airlines)',
         category: 'Airlines',
+        alliance: 'OneWorld',
         transferRatio: '1:1',
       },
       {
         name: 'Iberia Plus',
         category: 'Airlines',
+        alliance: 'OneWorld',
+
         transferRatio: '1:1',
       },
       {
         name: 'JetBlue TrueBlue',
         category: 'Airlines',
-        transferRatio: '250:200',
+        transferRatio: '5:4',
       },
       {
         name: 'Qantas Frequent Flyer',
         category: 'Airlines',
-        transferRatio: '500:500',
+        alliance: 'OneWorld',
+
+        transferRatio: '1:1',
       },
       {
         name: 'Qatar Airways Privilege Club',
         bonus: '1:1.2',
+        alliance: 'OneWorld',
+
         bonusUntil: '2025-03-31',
         category: 'Airlines',
         transferRatio: '1:1',
@@ -91,11 +112,14 @@ export const transferPartners: CreditCardProgram[] = [
       {
         name: 'Singapore Airlines KrisFlyer',
         category: 'Airlines',
+        alliance: 'Star Alliance',
         transferRatio: '1:1',
       },
       {
         name: 'Virgin Atlantic Flying Club',
         category: 'Airlines',
+        alliance: 'SkyTeam',
+
         transferRatio: '1:1',
       },
       {
@@ -118,6 +142,7 @@ export const transferPartners: CreditCardProgram[] = [
   {
     name: 'Chase',
     pointsName: 'Ultimate Rewards',
+    source: '/chase.png',
     partners: [
       {
         name: 'Aer Lingus AerClub',
@@ -129,16 +154,22 @@ export const transferPartners: CreditCardProgram[] = [
       {
         name: 'Air Canada Aeroplan',
         category: 'Airlines',
+        alliance: 'Star Alliance',
         transferRatio: '1:1',
       },
+
       {
         name: 'Air France/KLM Flying Blue',
         category: 'Airlines',
+        alliance: 'SkyTeam',
+
         transferRatio: '1:1',
       },
       {
         name: 'British Airways Executive Club',
         category: 'Airlines',
+        alliance: 'OneWorld',
+
         transferRatio: '1:1',
         bonus: '1:1.2',
         bonusUntil: '2025-03-31',
@@ -163,6 +194,8 @@ export const transferPartners: CreditCardProgram[] = [
       {
         name: 'Singapore Airlines KrisFlyer',
         category: 'Airlines',
+        alliance: 'Star Alliance',
+
         transferRatio: '1:1',
       },
       {
@@ -173,11 +206,15 @@ export const transferPartners: CreditCardProgram[] = [
       {
         name: 'United MileagePlus',
         category: 'Airlines',
+        alliance: 'Star Alliance',
+
         transferRatio: '1:1',
       },
       {
         name: 'Virgin Atlantic Flying Club',
         category: 'Airlines',
+        alliance: 'SkyTeam',
+
         transferRatio: '1:1',
       },
       {
@@ -202,29 +239,38 @@ export const transferPartners: CreditCardProgram[] = [
   {
     name: 'Capital One',
     pointsName: 'Venture Miles',
+    source: '/cap1.png',
     partners: [
       {
         name: 'Aeromexico Club Premier',
         category: 'Airlines',
+        alliance: 'SkyTeam',
+
         transferRatio: '1:1',
       },
       {
         name: 'Air Canada Aeroplan',
         category: 'Airlines',
+        alliance: 'Star Alliance',
+
         transferRatio: '1:1',
       },
       {
         name: 'Avianca LifeMiles',
         category: 'Airlines',
+        alliance: 'Star Alliance',
+
         transferRatio: '1:1',
       },
       {
         name: 'British Airways Executive Club',
         category: 'Airlines',
+        alliance: 'OneWorld',
         transferRatio: '1:1',
       },
       {
         name: 'Cathay Pacific Asia Miles',
+        alliance: 'OneWorld',
         category: 'Airlines',
         transferRatio: '1:1',
       },
@@ -242,6 +288,8 @@ export const transferPartners: CreditCardProgram[] = [
       },
       {
         name: 'EVA Air Infinity MileageLands',
+        alliance: 'Star Alliance',
+
         category: 'Airlines',
         transferRatio: '2:1.5',
       },
@@ -249,10 +297,13 @@ export const transferPartners: CreditCardProgram[] = [
         name: 'Finnair Plus',
         category: 'Airlines',
         transferRatio: '1:1',
+        alliance: 'OneWorld',
       },
       {
-        name: 'Flying Blue',
+        name: 'Air France/KLM Flying Blue',
         category: 'Airlines',
+        alliance: 'SkyTeam',
+
         transferRatio: '1:1',
       },
       {
@@ -263,26 +314,35 @@ export const transferPartners: CreditCardProgram[] = [
       {
         name: 'Qantas Frequent Flyer',
         category: 'Airlines',
+        alliance: 'OneWorld',
         transferRatio: '1:1',
       },
       {
         name: 'Singapore Airlines KrisFlyer',
+        alliance: 'Star Alliance',
+
         category: 'Airlines',
         transferRatio: '1:1',
       },
       {
         name: 'TAP Miles&Go',
+        alliance: 'Star Alliance',
+
         category: 'Airlines',
         transferRatio: '1:1',
       },
       {
         name: 'Turkish Airlines Miles&Smiles',
         category: 'Airlines',
+        alliance: 'Star Alliance',
+
         transferRatio: '1:1',
       },
       {
         name: 'Virgin Red',
         category: 'Airlines',
+        alliance: 'SkyTeam',
+
         transferRatio: '1:1',
       },
       {
@@ -305,6 +365,7 @@ export const transferPartners: CreditCardProgram[] = [
   {
     name: 'Bilt',
     pointsName: 'Bilt Rewards',
+    source: '/bilt.png',
     partners: [
       {
         name: 'Aer Lingus AerClub',
@@ -315,30 +376,40 @@ export const transferPartners: CreditCardProgram[] = [
         name: 'Air Canada Aeroplan',
         category: 'Airlines',
         transferRatio: '1:1',
+        alliance: 'Star Alliance',
       },
       {
         name: 'Air France/KLM Flying Blue',
         category: 'Airlines',
+        alliance: 'SkyTeam',
+
         transferRatio: '1:1',
       },
       {
         name: 'Alaska Airlines',
         category: 'Airlines',
+        alliance: 'OneWorld',
+
         transferRatio: '1:1',
       },
       {
         name: 'Avianca LifeMiles',
         category: 'Airlines',
         transferRatio: '1:1',
+        alliance: 'Star Alliance',
       },
       {
         name: 'British Airways Executive Club',
         category: 'Airlines',
+        alliance: 'OneWorld',
+
         transferRatio: '1:1',
       },
       {
-        name: 'Cathay Pacific',
+        name: 'Cathay Pacific Asia Miles',
         category: 'Airlines',
+        alliance: 'OneWorld',
+
         transferRatio: '1:1',
       },
       {
@@ -349,26 +420,35 @@ export const transferPartners: CreditCardProgram[] = [
       {
         name: 'Iberia Plus',
         category: 'Airlines',
+        alliance: 'OneWorld',
+
         transferRatio: '1:1',
       },
       {
         name: 'TAP Miles&Go',
         category: 'Airlines',
+        alliance: 'Star Alliance',
+
         transferRatio: '1:1',
       },
       {
         name: 'Turkish Airlines Miles&Smiles',
         category: 'Airlines',
+        alliance: 'Star Alliance',
+
         transferRatio: '1:1',
       },
       {
         name: 'United MileagePlus',
         category: 'Airlines',
         transferRatio: '1:1',
+        alliance: 'Star Alliance',
       },
       {
         name: 'Virgin Red',
         category: 'Airlines',
+        alliance: 'SkyTeam',
+
         transferRatio: '1:1',
       },
       {
@@ -401,27 +481,35 @@ export const transferPartners: CreditCardProgram[] = [
   {
     name: 'Citi',
     pointsName: 'ThankYou Points',
+    source: '/citi.svg',
     partners: [
       {
         name: 'Aeromexico Club Premier',
         category: 'Airlines',
+        alliance: 'SkyTeam',
+
         transferRatio: '1:1',
       },
       {
         name: 'Air France/KLM Flying Blue',
         category: 'Airlines',
+        alliance: 'SkyTeam',
+
         transferRatio: '1:1',
       },
       {
         name: 'Avianca LifeMiles',
         category: 'Airlines',
         bonus: '1:1.25',
+        alliance: 'Star Alliance',
         bonusUntil: '2025-04-12',
         transferRatio: '1:1',
       },
       {
         name: 'Cathay Pacific Asia Miles',
         category: 'Airlines',
+        alliance: 'OneWorld',
+
         transferRatio: '1:1',
       },
       {
@@ -437,6 +525,8 @@ export const transferPartners: CreditCardProgram[] = [
       {
         name: 'EVA Air Infinity MileageLands',
         category: 'Airlines',
+        alliance: 'Star Alliance',
+
         transferRatio: '1:1',
       },
       {
@@ -447,31 +537,42 @@ export const transferPartners: CreditCardProgram[] = [
       {
         name: 'Qantas Frequent Flyer',
         category: 'Airlines',
+        alliance: 'OneWorld',
+
         transferRatio: '1:1',
       },
       {
         name: 'Qatar Airways Privilege Club',
         category: 'Airlines',
         transferRatio: '1:1',
+        alliance: 'OneWorld',
       },
       {
         name: 'Singapore Airlines KrisFlyer',
         category: 'Airlines',
+        alliance: 'Star Alliance',
+
         transferRatio: '1:1',
       },
       {
         name: 'Thai Airways Royal Orchid Plus',
         category: 'Airlines',
+        alliance: 'Star Alliance',
+
         transferRatio: '1:1',
       },
       {
         name: 'Turkish Airlines Miles&Smiles',
         category: 'Airlines',
+        alliance: 'Star Alliance',
+
         transferRatio: '1:1',
       },
       {
         name: 'Virgin Atlantic Flying Club',
         category: 'Airlines',
+        alliance: 'SkyTeam',
+
         transferRatio: '1:1',
       },
       {
