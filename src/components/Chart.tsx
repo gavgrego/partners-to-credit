@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
-import { PARTNER_COLORS } from '@/constants';
 import {
   createLabels,
   createLinks,
@@ -8,6 +7,7 @@ import {
   transformData,
   initializeSankey,
 } from '@/utils';
+import { PARTNER_COLORS } from '@/constants';
 
 const TransferChart = () => {
   const svgRef = useRef<SVGSVGElement>(null);

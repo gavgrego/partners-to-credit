@@ -7,11 +7,11 @@ export const BRAND_COLORS: Record<string, string> = {
 };
 
 export const BRAND_LOGOS: Record<string, string> = {
-  'American Express': '/src/assets/logos/amex.svg',
-  Chase: '/src/assets/logos/chase.png',
-  'Capital One': '/src/assets/logos/cap1.png',
-  Bilt: '/src/assets/logos/bilt.png',
-  Citi: '/src/assets/logos/citi.svg',
+  'American Express': '/amex.svg',
+  Chase: '/chase.png',
+  'Capital One': '/cap1.png',
+  Bilt: '/bilt.png',
+  Citi: '/citi.svg',
 };
 
 export const PARTNER_COLORS = [
