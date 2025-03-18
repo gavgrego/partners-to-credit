@@ -1,4 +1,4 @@
-# partnerto.credit
+# partnersto.credit
 
 See which Banks/Programs transfer to particular airlines and hotels. Also see current transfer bonuses.
 
