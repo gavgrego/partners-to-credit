@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet-async';
+import GA from './GA';
 interface SEOProps {
   title?: string;
   description?: string;
@@ -20,25 +21,28 @@ const SEO = ({
       : `${title} | Credit Card Points Transfer Guide`;
 
   return (
-    <Helmet>
-      <title>{siteTitle}</title>
-      <meta name="description" content={description} />
-      <link rel="canonical" href={canonical} />
-      <link rel="icon" href="/favicon.ico" />
-      <meta property="og:title" content={siteTitle} />
-      <meta property="og:description" content={description} />
-      <meta property="og:type" content={type} />
-      <meta property="og:site_name" content={name} />
-      <meta property="og:url" content={canonical} />
+    <>
+      <Helmet>
+        <title>{siteTitle}</title>
+        <meta name="description" content={description} />
+        <link rel="canonical" href={canonical} />
+        <link rel="icon" href="/favicon.ico" />
+        <meta property="og:title" content={siteTitle} />
+        <meta property="og:description" content={description} />
+        <meta property="og:type" content={type} />
+        <meta property="og:site_name" content={name} />
+        <meta property="og:url" content={canonical} />
 
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={siteTitle} />
-      <meta name="twitter:description" content={description} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={siteTitle} />
+        <meta name="twitter:description" content={description} />
 
-      <meta name="robots" content="index, follow" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
-    </Helmet>
+        <meta name="robots" content="index, follow" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
+      </Helmet>
+      <GA />
+    </>
   );
 };
 
