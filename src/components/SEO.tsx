@@ -8,14 +8,14 @@ interface SEOProps {
 }
 
 const SEO = ({
-  title = 'partnersto.credit - Credit Card Points Transfer Guide',
+  title = 'points.credit - Credit Card Points Transfer Guide',
   description = 'Find the best credit card transfer partners and current point transfer bonuses. Compare transfer ratios across American Express, Chase, Capital One, Citi, and BILT. See the list of credit card transfer partners and our interactive chart to see which airlines and hotels you can transfer your credit card points to.',
-  canonical = 'https://partnersto.credit',
+  canonical = 'https://points.credit',
   type = 'website',
-  name = 'partnersto.credit',
+  name = 'points.credit',
 }: SEOProps) => {
   const siteTitle =
-    title === 'partnersto.credit - Credit Card Points Transfer Guide'
+    title === 'points.credit - Credit Card Points Transfer Guide'
       ? title
       : `${title} | Credit Card Points Transfer Guide`;
 

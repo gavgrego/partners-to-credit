@@ -53,7 +53,7 @@ function BankPage() {
       <SEO
         title={`${bankData.name} Transfer Partners`}
         description={`View all ${bankData.name} transfer partners and current transfer bonuses. Compare transfer ratios and find the best value for your points.`}
-        canonical={`https://partnersto.credit/${bankSlug}`}
+        canonical={`https://points.credit/${bankSlug}`}
       />
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-4xl font-bold flex items-center gap-4">
