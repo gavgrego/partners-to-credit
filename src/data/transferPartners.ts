@@ -372,7 +372,7 @@ export const transferPartners: CreditCardProgram[] = [
     name: 'Bilt',
     pointsName: 'Bilt Rewards',
     warning:
-      "BILT sometimeshas 'Rent Day' transfer bonuses on the 1st of the month.  Depending on your BILT tier (Blue, Silver, Gold, or Platinum) you will be award a diferent transfer bonus.",
+      "BILT sometimes has 'Rent Day' transfer bonuses on the 1st of the month.  Depending on your BILT tier (Blue, Silver, Gold, or Platinum) you will be award a diferent transfer bonus.",
     source: '/bilt.png',
     partners: [
       {
