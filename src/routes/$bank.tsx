@@ -72,6 +72,12 @@ function BankPage() {
         Transfer your {bankData.pointsName} to the following partners:
       </p>
 
+      {bankData.warning && (
+        <p className="text-sm mb-8 text-muted-foreground max-w-prose">
+          ❗ {bankData.warning}
+        </p>
+      )}
+
       <div className="flex items-center justify-start space-x-2 mb-6">
         <Switch
           id="show-bonuses"

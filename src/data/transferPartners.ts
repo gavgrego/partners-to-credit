@@ -352,7 +352,7 @@ export const transferPartners: CreditCardProgram[] = [
         transferRatio: '1:1',
       },
       {
-        name: 'Accor Live Limitless',
+        name: 'ALL - Accor Live Limitless',
         category: 'Hotels',
         transferRatio: '2:1',
       },
@@ -458,7 +458,7 @@ export const transferPartners: CreditCardProgram[] = [
         transferRatio: '1:1',
       },
       {
-        name: 'Accor Live Limitless',
+        name: 'ALL - Accor Live Limitless',
         category: 'Hotels',
         transferRatio: '3:2',
       },
@@ -488,6 +488,8 @@ export const transferPartners: CreditCardProgram[] = [
     name: 'Citi',
     pointsName: 'ThankYou Points',
     source: '/citi.svg',
+    warning:
+      'These rates are assuming you have a Citi Strata Premier or Citi Prestige card.  Other Citi cards earning ThankYou Points transfer to Choice at 1:1.5, Wyndham at 1:0.8, and Jetblue at 1:0.8',
     partners: [
       {
         name: 'Aeromexico Club Premier',
@@ -591,6 +593,21 @@ export const transferPartners: CreditCardProgram[] = [
         name: 'Wyndham Rewards',
         category: 'Hotels',
         transferRatio: '1:1',
+      },
+      {
+        name: 'ALL - Accor Live Limitless',
+        category: 'Hotels',
+        transferRatio: '2:1',
+      },
+      {
+        name: 'Leaders Club',
+        category: 'Hotels',
+        transferRatio: '5:1',
+      },
+      {
+        name: 'Preferred Hotels & Resorts',
+        category: 'Hotels',
+        transferRatio: '1:4',
       },
     ],
   },

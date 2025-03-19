@@ -66,9 +66,6 @@ export const transformData = (transferPartners: CreditCardProgram[]) => {
   // Create links
   transferPartners.forEach((program) => {
     program.partners.forEach((partner) => {
-      const [from, to] = partner.transferRatio?.split(':').map(Number) || [
-        1, 1,
-      ];
       const bankIndex = nodeIndexMap.get(program.name);
       const partnerIndex = nodeIndexMap.get(partner.name);
 
@@ -78,7 +75,8 @@ export const transformData = (transferPartners: CreditCardProgram[]) => {
         links.push({
           source: isLeftPartner ? partnerIndex : bankIndex,
           target: isLeftPartner ? bankIndex : partnerIndex,
-          value: to / from,
+          value: 1,
+          ratio: partner.transferRatio,
         });
       }
     });
@@ -129,7 +127,7 @@ export const createLinks = (
           x,
           y - 30,
           sourceNode,
-          partnerData?.transferRatio || `${d.value}:1`,
+          partnerData?.transferRatio || '1:1',
           targetNode
         );
       }

@@ -13,6 +13,7 @@ export type CreditCardProgram = {
   pointsName: string;
   source: string;
   partners: TransferPartner[];
+  warning?: string;
 };
 
 import { SimulationNodeDatum, SimulationLinkDatum } from 'd3';
@@ -32,4 +33,5 @@ export interface Link extends SimulationLinkDatum<Node> {
   target: number;
   value: number;
   width?: number;
+  ratio?: string;
 }
