@@ -1,10 +1,17 @@
-import { Card } from '@/components/ui/card';
 import { createFileRoute } from '@tanstack/react-router';
 import { useTransferPartners } from '@/hooks/useTransferPartners';
 import { Switch } from '@/components/ui/switch';
 import { useState } from 'react';
 import SEO from '@/components/SEO';
 import { Spinner } from '@/components/Spinner';
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableHead,
+  TableRow,
+  TableCell,
+} from '@/components/ui/table';
 
 export const Route = createFileRoute('/$bank')({
   component: BankPage,
@@ -33,7 +40,6 @@ function BankPage() {
   const bankData = transferPartners?.find(
     (p) => p.name.toLowerCase().replace(/\s+/g, '-') === bank.toLowerCase()
   );
-
   const bankLogo = bankData?.source;
   const bankSlug = bankData?.name.toLowerCase().replace(/\s+/g, '-');
 
@@ -80,38 +86,45 @@ function BankPage() {
         </label>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {filteredPartners.map((partner) => (
-          <Card key={partner.name} className="p-6 flex flex-col">
-            <h3 className="text-lg font-semibold mb-2">{partner.name}</h3>
-
-            <div className="mt-auto">
-              <span className="font-medium">
-                Transfer Ratio:{' '}
-                <span
-                  className={
-                    partner.bonus ? 'line-through' : 'text-foreground font-bold'
-                  }
-                >
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Partner</TableHead>
+            <TableHead>Transfer Ratio</TableHead>
+            <TableHead>Bonus</TableHead>
+            <TableHead>Valid Until</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {filteredPartners.map((partner) => (
+            <TableRow key={partner.name}>
+              <TableCell className="font-medium">
+                {partner.name} {partner.category === 'Airlines' ? '✈️' : '🏨'}
+              </TableCell>
+              <TableCell>
+                <span className={partner.bonus ? 'line-through' : 'font-bold'}>
                   {partner.transferRatio}
                 </span>
+              </TableCell>
+              <TableCell>
                 {partner.bonus && (
-                  <>
-                    <div className="text-green-500 font-bold">
-                      {partner.bonus} a{' '}
-                      <span className="text-lg">{partner.bonusPercent}%</span>{' '}
-                      bonus
-                    </div>
-                    <div className="text-foreground">
-                      until {partner.bonusUntil}
-                    </div>
-                  </>
+                  <span className="text-green-500 font-bold">
+                    {partner.bonus}{' '}
+                    <span className="text-sm">({partner.bonusPercent}%)</span>
+                  </span>
                 )}
-              </span>
-            </div>
-          </Card>
-        ))}
-      </div>
+              </TableCell>
+              <TableCell>
+                {partner.bonusUntil && (
+                  <span className="text-muted-foreground">
+                    {partner.bonusUntil}
+                  </span>
+                )}
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
     </div>
   );
 }

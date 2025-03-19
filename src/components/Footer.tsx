@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer className="text-sm flex justify-center py-6 flex-col gap-2 items-center">
+    <footer className="text-xs flex justify-center py-6 flex-col gap-2 items-center">
       <p className="text-muted-foreground">
         Built by{' '}
         <a target="_blank" href="https://gregorygav.in">
@@ -11,7 +11,7 @@ const Footer = () => {
           Bay Area
         </a>
       </p>
-      <p className="text-muted-foreground text-xs">
+      <p className="text-muted-foreground text-xs text-center">
         See incorrect data? Please email{' '}
         <a href="mailto:gavin@thecomponent.studio">gavin@thecomponent.studio</a>
       </p>

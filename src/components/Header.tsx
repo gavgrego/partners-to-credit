@@ -14,7 +14,7 @@ import { TooltipProvider, TooltipTrigger } from '@radix-ui/react-tooltip';
 const Header = () => {
   return (
     <div className="shadow-sm mx-auto px-4 pt-4 sm:px-6 lg:px-8">
-      <header className="flex items-center justify-start gap-2 text-foreground">
+      <header className="flex items-center flex-col sm:flex-row justify-start gap-2 text-foreground">
         <Link to="/" className="flex items-center gap-2">
           <ArrowLeftRight className="animate-[wiggle_1s_ease-in-out_infinite]" />
           <span className="text-2xl font-bold">points.credit</span>
