@@ -2,7 +2,7 @@ import Chart from '@/components/Chart';
 import CurrentBonuses from '@/components/CurrentBonuses';
 import { Spinner } from '@/components/Spinner';
 import { Card } from '@/components/ui/card';
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, Link } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/')({
   component: IndexPage,

@@ -11,20 +11,27 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as BankImport } from './routes/$bank'
+import { Route as ReferralsImport } from './routes/referrals'
 import { Route as IndexImport } from './routes/index'
+import { Route as ProgramBankImport } from './routes/program/$bank'
 
 // Create/Update Routes
 
-const BankRoute = BankImport.update({
-  id: '/$bank',
-  path: '/$bank',
+const ReferralsRoute = ReferralsImport.update({
+  id: '/referrals',
+  path: '/referrals',
   getParentRoute: () => rootRoute,
 } as any)
 
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ProgramBankRoute = ProgramBankImport.update({
+  id: '/program/$bank',
+  path: '/program/$bank',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -39,11 +46,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/$bank': {
-      id: '/$bank'
-      path: '/$bank'
-      fullPath: '/$bank'
-      preLoaderRoute: typeof BankImport
+    '/referrals': {
+      id: '/referrals'
+      path: '/referrals'
+      fullPath: '/referrals'
+      preLoaderRoute: typeof ReferralsImport
+      parentRoute: typeof rootRoute
+    }
+    '/program/$bank': {
+      id: '/program/$bank'
+      path: '/program/$bank'
+      fullPath: '/program/$bank'
+      preLoaderRoute: typeof ProgramBankImport
       parentRoute: typeof rootRoute
     }
   }
@@ -53,37 +67,42 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/$bank': typeof BankRoute
+  '/referrals': typeof ReferralsRoute
+  '/program/$bank': typeof ProgramBankRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/$bank': typeof BankRoute
+  '/referrals': typeof ReferralsRoute
+  '/program/$bank': typeof ProgramBankRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/$bank': typeof BankRoute
+  '/referrals': typeof ReferralsRoute
+  '/program/$bank': typeof ProgramBankRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/$bank'
+  fullPaths: '/' | '/referrals' | '/program/$bank'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/$bank'
-  id: '__root__' | '/' | '/$bank'
+  to: '/' | '/referrals' | '/program/$bank'
+  id: '__root__' | '/' | '/referrals' | '/program/$bank'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  BankRoute: typeof BankRoute
+  ReferralsRoute: typeof ReferralsRoute
+  ProgramBankRoute: typeof ProgramBankRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  BankRoute: BankRoute,
+  ReferralsRoute: ReferralsRoute,
+  ProgramBankRoute: ProgramBankRoute,
 }
 
 export const routeTree = rootRoute
@@ -97,14 +116,18 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/$bank"
+        "/referrals",
+        "/program/$bank"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
-    "/$bank": {
-      "filePath": "$bank.tsx"
+    "/referrals": {
+      "filePath": "referrals.tsx"
+    },
+    "/program/$bank": {
+      "filePath": "program/$bank.tsx"
     }
   }
 }

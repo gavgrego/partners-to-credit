@@ -1,10 +1,15 @@
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import SEO from '@/components/SEO';
-import { Outlet, createRootRoute } from '@tanstack/react-router';
+import { Link, Outlet, createRootRoute } from '@tanstack/react-router';
 
 export const Route = createRootRoute({
   component: RootComponent,
+  notFoundComponent: () => (
+    <div className="text-foreground">
+      Page not found! <Link to="/">Go home!</Link>
+    </div>
+  ),
 });
 
 function RootComponent() {

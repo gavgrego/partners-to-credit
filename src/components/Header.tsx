@@ -27,23 +27,23 @@ const Header = () => {
               </NavigationMenuTrigger>
               <NavigationMenuContent className="[&_div]:p-1">
                 {/* @ts-ignore */}
-                <Link to="/american-express">
+                <Link to="/program/american-express">
                   <div>American Express</div>
                 </Link>
                 {/* @ts-ignore */}
-                <Link to="/chase">
+                <Link to="/program/chase">
                   <div>Chase</div>
                 </Link>
                 {/* @ts-ignore */}
-                <Link to="/capital-one">
+                <Link to="/program/capital-one">
                   <div>Capital One</div>
                 </Link>
                 {/* @ts-ignore */}
-                <Link to="/citi">
+                <Link to="/program/citi">
                   <div>Citi</div>
                 </Link>
                 {/* @ts-ignore */}
-                <Link to="/bilt">
+                <Link to="/program/bilt">
                   <div>BILT</div>
                 </Link>
               </NavigationMenuContent>

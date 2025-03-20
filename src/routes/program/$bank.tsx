@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, Link } from '@tanstack/react-router';
 import { useTransferPartners } from '@/hooks/useTransferPartners';
 import { Switch } from '@/components/ui/switch';
 import { useState } from 'react';
@@ -13,11 +13,16 @@ import {
   TableCell,
 } from '@/components/ui/table';
 
-export const Route = createFileRoute('/$bank')({
+export const Route = createFileRoute('/program/$bank')({
   component: BankPage,
   pendingComponent: () => (
     <div className="animate-pulse text-muted-foreground">
       <Spinner size="lg" />
+    </div>
+  ),
+  notFoundComponent: () => (
+    <div className="text-foreground">
+      Page not found. <Link to="/">Go home!</Link>
     </div>
   ),
 });
