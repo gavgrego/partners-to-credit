@@ -372,13 +372,17 @@ export const transferPartners: CreditCardProgram[] = [
     name: 'Bilt',
     pointsName: 'Bilt Rewards',
     warning:
-      "BILT sometimes has 'Rent Day' transfer bonuses on the 1st of the month.  Depending on your BILT tier (Blue, Silver, Gold, or Platinum) you will be awarded a diferent transfer bonus for that day.",
+      "BILT sometimes has 'Rent Day' transfer bonuses lasting for a month, typically announced in the last week of the month prior.  Depending on your BILT tier (Blue, Silver, Gold, or Platinum) you will be awarded a diferent transfer bonus for that day.",
     source: '/bilt.png',
     partners: [
       {
         name: 'Aer Lingus AerClub',
         category: 'Airlines',
         transferRatio: '1:1',
+        bonusUntil: 'Whole Month of April',
+
+        bonus:
+          '1:1.5 for Blue, 1:1.6 for Silver, 1:1.75 for Gold, 1:2 for Platinum',
       },
       {
         name: 'Air Canada Aeroplan',
@@ -390,7 +394,6 @@ export const transferPartners: CreditCardProgram[] = [
         name: 'Air France/KLM Flying Blue',
         category: 'Airlines',
         alliance: 'SkyTeam',
-
         transferRatio: '1:1',
       },
       {
@@ -410,6 +413,10 @@ export const transferPartners: CreditCardProgram[] = [
         name: 'British Airways Executive Club',
         category: 'Airlines',
         alliance: 'OneWorld',
+        bonusUntil: 'Whole Month of April',
+
+        bonus:
+          '1:1.5 for Blue, 1:1.6 for Silver, 1:1.75 for Gold, 1:2 for Platinum',
 
         transferRatio: '1:1',
       },
@@ -429,6 +436,9 @@ export const transferPartners: CreditCardProgram[] = [
         name: 'Iberia Plus',
         category: 'Airlines',
         alliance: 'OneWorld',
+        bonus:
+          '1:1.5 for Blue, 1:1.6 for Silver, 1:1.75 for Gold, 1:2 for Platinum',
+        bonusUntil: 'Whole Month of April',
 
         transferRatio: '1:1',
       },
