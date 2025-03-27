@@ -53,10 +53,7 @@ function BankPage() {
   }
 
   const filteredPartners = showOnlyBonuses
-    ? bankData.partners.filter(
-        (partner) =>
-          partner.bonus && partner.bonusPercent && partner.bonusPercent > 0
-      )
+    ? bankData.partners.filter((partner) => partner.bonus)
     : bankData.partners;
 
   return (
