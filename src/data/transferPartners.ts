@@ -373,7 +373,7 @@ export const transferPartners: CreditCardProgram[] = [
     pointsName: 'BILT Rewards',
     warning:
       "BILT sometimes has 'Rent Day' transfer bonuses lasting for a month, typically announced in the last week of the month prior.  Depending on your BILT tier (Blue, Silver, Gold, or Platinum) you will be awarded a diferent transfer bonus for that day.",
-    source: '/BILT.png',
+    source: '/bilt.png',
     partners: [
       {
         name: 'Aer Lingus AerClub',
