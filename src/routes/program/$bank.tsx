@@ -121,7 +121,9 @@ function BankPage() {
                 {partner.bonus && (
                   <span className="text-green-500 font-bold">
                     {partner.bonus}{' '}
-                    <span className="text-sm">({partner.bonusPercent}%)</span>
+                    {bankData.name !== 'BILT' && (
+                      <span className="text-sm">({partner.bonusPercent}%)</span>
+                    )}
                   </span>
                 )}
               </TableCell>

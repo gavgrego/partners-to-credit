@@ -54,8 +54,13 @@ const CurrentBonuses = () => {
                 <p className="text-sm text-muted-foreground">
                   <span className="line-through">{bonus.originalRatio}</span>{' '}
                   <span className="text-green-500 font-bold">
-                    {bonus.bonus} a{' '}
-                    <span className="text-lg">{bonus.bonusPercent}%</span> bonus
+                    {bonus.bonus}
+                    {bonus.bank !== 'BILT' && (
+                      <>
+                        a <span className="text-lg">{bonus.bonusPercent}%</span>{' '}
+                        bonus
+                      </>
+                    )}
                   </span>
                 </p>
                 <p className="text-sm text-muted-foreground">
